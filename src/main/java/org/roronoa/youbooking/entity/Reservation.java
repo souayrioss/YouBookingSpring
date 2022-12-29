@@ -1,7 +1,6 @@
 package org.roronoa.youbooking.entity;
 
 import jakarta.persistence.*;
-import jdk.jfr.Registered;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

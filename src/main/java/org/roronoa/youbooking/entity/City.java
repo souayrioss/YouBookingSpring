@@ -25,7 +25,7 @@ public class City {
     @OneToMany(mappedBy = "city")
     private List<Address> addresses;
 
-    @ManyToOne
+    @ManyToOne @Valid
     private Country country;
 
 }

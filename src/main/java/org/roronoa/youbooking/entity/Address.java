@@ -14,10 +14,10 @@ public class Address {
     @SequenceGenerator(name = "address_seq")
     @Column(nullable = false)
     private Long id;
-    private String address;
+    private String locality;
 
 
-    @ManyToOne
+    @ManyToOne @Valid
     private City city;
 
 }
