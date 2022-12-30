@@ -32,6 +32,9 @@ public class Room {
     private RoomType roomType;
 
     @ManyToOne
+    private Reservation reservation;
+
+    @ManyToOne
     private Hotel hotel;
 
 
