@@ -17,7 +17,7 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservation_seq")
     @SequenceGenerator(name = "reservation_seq")
     @Column(nullable = false)
-    private Long id;
+    private Long idReservation;
 
     @NotNull
     @NotEmpty
@@ -34,7 +34,10 @@ public class Reservation {
     private float totalPrice;
 
 
-    @OneToMany(mappedBy = "reservation")
+    @ManyToMany
+    @JoinTable(name = "T_reservations_rooms__Associations",
+            joinColumns = @JoinColumn( name = "idReservation" ),
+            inverseJoinColumns = @JoinColumn( name = "idRoom" ) )
     private List<Room> rooms;
 
     @ManyToOne

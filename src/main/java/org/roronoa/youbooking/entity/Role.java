@@ -18,14 +18,15 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
     @SequenceGenerator(name = "role_seq")
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(nullable = false)
+    private Long idRole;
     @NotNull @NotEmpty
     private String name;
     @OneToMany(mappedBy = "role")
     private List<UserApp> usersApp;
     @ManyToMany @Valid
     @JoinTable(name = "T_roles_authorities__Associations",
-            joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn( name = "idRole" ),
+            inverseJoinColumns = @JoinColumn( name = "idAuthority" ) )
     private List<Authority> authorities ;
 }
