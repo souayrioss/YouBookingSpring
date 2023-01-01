@@ -30,5 +30,6 @@ public class Hotel {
     @OneToMany(mappedBy = "hotel")
     private List<Room> rooms = new ArrayList<>();
     private boolean available;
+    @Enumerated(EnumType.STRING)
     private StatusOffer statusOffer;
 }

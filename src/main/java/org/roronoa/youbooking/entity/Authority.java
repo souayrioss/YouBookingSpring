@@ -14,7 +14,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +24,7 @@ public class Authority {
     @SequenceGenerator(name = "authority_seq",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "authority_seq")
     @Column(nullable = false,unique = true)
-    private Long id;
+    private Long idAuthority;
 
     @NotNull
     @NotEmpty
@@ -34,7 +33,8 @@ public class Authority {
 
     @ManyToMany
     @JoinTable(name = "T_roles_authorities__Associations",
-            joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
-    private List<Role> roles = new ArrayList<>();
+            joinColumns = @JoinColumn( name = "idAuthority" ),
+            inverseJoinColumns = @JoinColumn( name = "idRole" ) )
+    private List<Role> roles;
 
 }

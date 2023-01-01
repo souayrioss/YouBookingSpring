@@ -1,10 +1,13 @@
 package org.roronoa.youbooking.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -14,7 +17,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_seq")
     @SequenceGenerator(name = "room_seq")
     @Column(nullable = false)
-    private Long id;
+    private Long idRoom;
 
 
     @NotEmpty
@@ -31,8 +34,11 @@ public class Room {
     @NotNull
     private RoomType roomType;
 
-    @ManyToOne
-    private Reservation reservation;
+    @ManyToMany @Valid
+    @JoinTable(name = "T_reservations_rooms__Associations",
+            joinColumns = @JoinColumn( name = "idRoom" ),
+            inverseJoinColumns = @JoinColumn( name = "idReservation" ) )
+    private List<Reservation> reservations;
 
     @ManyToOne
     private Hotel hotel;
