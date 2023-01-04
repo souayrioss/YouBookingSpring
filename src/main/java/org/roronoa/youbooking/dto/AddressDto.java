@@ -1,6 +1,7 @@
 package org.roronoa.youbooking.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -9,6 +10,6 @@ import java.io.Serializable;
  */
 @Data
 public class AddressDto implements Serializable {
-    private final Long id;
-    private final String locality;
+    private Long id;
+    private String locality;
 }

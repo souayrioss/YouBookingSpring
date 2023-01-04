@@ -1,9 +1,10 @@
 package org.roronoa.youbooking.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.roronoa.youbooking.dto.HotelDto;
 import org.roronoa.youbooking.dto.RoleDto;
 import org.roronoa.youbooking.entity.Reservation;
@@ -18,22 +19,22 @@ import java.util.List;
 @Data
 public class UserAppDto implements Serializable {
 
-    private final String uuid;
+    private String uuid;
     @NotNull
     @NotEmpty
-    private final String fullName;
+    private String fullName;
     @NotNull
     @NotEmpty
     @Email
-    private final String email;
+    private String email;
     @NotNull
     @NotEmpty
-    private final String password;
+    private String password;
     @NotNull
     @NotEmpty
-    private final String phone;
-    private final RoleDto role;
-    private final List<HotelDto> hotels;
-    private final List<ReservationDto> reservations;
+    private String phone;
+    private RoleDto role;
+
+    private List<ReservationDto> reservations;
 
 }

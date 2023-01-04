@@ -1,35 +1,28 @@
 package org.roronoa.youbooking.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.roronoa.youbooking.dto.HotelDto;
-import org.roronoa.youbooking.dto.UserAppDto;
-import org.roronoa.youbooking.entity.Reservation;
-import org.roronoa.youbooking.entity.Room;
-import org.roronoa.youbooking.entity.RoomType;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * A DTO for the {@link Reservation} entity
- */
+
 @Data
 public class ReservationDto implements Serializable {
 
-    private final String uuid;
-    private final LocalDate dateReservation;
-    private final LocalDate dateDebut;
+    private String uuid;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dateReservation;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dateDebut;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dateFin;
     @NotEmpty
-    private final LocalDate dateFin;
-    @NotEmpty
-    private final int range;
-    @NotEmpty
-    private final float totalPrice;
-    private final List<RoomDto> rooms;
-    private final UserAppDto userApp;
+    private float totalPrice;
+    private List<RoomDto> rooms;
+    private UserAppDto userApp;
 
 
 }
