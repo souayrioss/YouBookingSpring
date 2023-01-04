@@ -1,9 +1,9 @@
 package org.roronoa.youbooking.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,16 +14,15 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class    Role {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
-    @SequenceGenerator(name = "role_seq")
+    @SequenceGenerator(name = "role_seq",allocationSize = 1,initialValue = 1)
     @Column(nullable = false)
     private Long idRole;
     @NotNull @NotEmpty
     private String name;
-    @OneToMany(mappedBy = "role")
-    private List<UserApp> usersApp;
+
     @ManyToMany @Valid
     @JoinTable(name = "T_roles_authorities__Associations",
             joinColumns = @JoinColumn( name = "idRole" ),
