@@ -1,8 +1,9 @@
 package org.roronoa.youbooking.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.roronoa.youbooking.entity.RoomType;
 
 import java.io.Serializable;
@@ -13,12 +14,11 @@ import java.io.Serializable;
 @Data
 public class RoomDto implements Serializable {
 
-    private final String reference;
+    private String reference;
     @NotEmpty
-    private final float price;
-    private final boolean reserved;
-    @NotNull
-    private final RoomType roomType;
-    private final ReservationDto reservation;
-    private final HotelDto hotel;
+    private float price;
+    private boolean reserved;
+    private String roomType;
+    private ReservationDto reservation;
+
 }
