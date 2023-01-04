@@ -1,8 +1,10 @@
 package org.roronoa.youbooking.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.roronoa.youbooking.entity.RoomType;
 
 import java.io.Serializable;
 
@@ -11,10 +13,11 @@ import java.io.Serializable;
  */
 @Data
 public class AttachmentDto implements Serializable {
-
-    private final String uuid;
+    private Long id;
+    private String uuid;
     @NotEmpty
     @NotNull
-    private final String fileUrl;
-    private final HotelDto hotel;
+    private String fileName;
+    private String attachmentType;
+    private HotelDto hotel;
 }

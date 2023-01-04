@@ -1,8 +1,8 @@
 package org.roronoa.youbooking.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,10 +13,10 @@ import java.util.List;
  */
 @Data
 public class CityDto implements Serializable {
-    private final Long id;
+    private Long id;
     @NotNull
     @NotEmpty
     @NotBlank
-    private final String name;
-    private final List<AddressDto> addresses;
+    private String name;
+    private List<AddressDto> addresses;
 }
