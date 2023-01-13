@@ -30,6 +30,7 @@ import static org.roronoa.youbooking.util.IConstantes.*;
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
+@CrossOrigin("**")
 public class UserResource {
 
     private final IUserService userService;
@@ -56,8 +57,7 @@ public class UserResource {
     @PostMapping(path = "/login")
     public ResponseEntity<ResponseDTO<UserDetails>> login(@RequestBody @Valid AuthDto authDto){
         try {
-            Authentication test = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authDto.getEmail(),authDto.getPassword()));
-            System.out.println(test);
+            //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authDto.getEmail(),authDto.getPassword()));
             UserDetails user = userService.findByEmail(authDto.getEmail());
             ResponseDTO<UserDetails> response = new ResponseDTO<>() ;
             if (user != null){
