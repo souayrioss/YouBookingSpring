@@ -1,4 +1,4 @@
-package org.roronoa.spring_security.config;
+package org.roronoa.youbooking.config;
 
 import lombok.RequiredArgsConstructor;
 import org.roronoa.youbooking.config.JwtAuthFilter;
@@ -15,14 +15,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 
 @Configurable
+
+
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -32,15 +41,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/**/authenticate/**").permitAll()
-                .requestMatchers("/api/commande/**").hasAuthority("client")
-                .requestMatchers("/api/produits").hasAnyAuthority("client","stock")
-                .requestMatchers("/api/produits/**").hasAuthority("stock")
-                .requestMatchers("/api/appelOffre/add").hasAuthority("stock")
-                .requestMatchers("/api/appelOffre/appelsoffrestock/**").hasAuthority("stock")
-                .requestMatchers("/api/appelOffre/**").hasAuthority("fournisseur")
+                .antMatchers("/api/v1/user/register").permitAll()
+                .antMatchers("/api/v1/user/login").permitAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(STATELESS)
@@ -66,8 +71,8 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // return NoOpPasswordEncoder.getInstance();
-        return new BCryptPasswordEncoder();
+         return NoOpPasswordEncoder.getInstance();
+        //return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -79,6 +84,22 @@ public class SecurityConfig {
             }
         };
 
+
+    }
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200/"));
+        corsConfiguration.setAllowedHeaders(Arrays.asList("Origin","Access-Control-Allow-Origin",
+                "Content-Type","Accept","Authorization","Origin,Accept","X-Requested-With",
+                "Access-Control-Request-Method","Access-Control-Request-Headers"));
+        corsConfiguration.setExposedHeaders(Arrays.asList("Origin","Content-Type","Accept","Authorization",
+                "Access-Control-Allow-Origin","Access-Control-Allow-Origin","Access-Control-Allow-Credentials"));
+        corsConfiguration.setAllowedMethods(Arrays.asList("GET","PUT","POST","DELETE","OPTIONS"));
+        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+        return new CorsFilter(urlBasedCorsConfigurationSource);
 
     }
 
