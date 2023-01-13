@@ -1,15 +1,15 @@
 package org.roronoa.youbooking.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.List;
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_seq")
-    @SequenceGenerator(name = "country_seq")
+    @SequenceGenerator(name = "country_seq",allocationSize = 1,initialValue = 1)
     @Column(nullable = false)
     private Long id;
     @NotNull @NotEmpty @NotBlank

@@ -1,7 +1,7 @@
 package org.roronoa.youbooking.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
+import javax.persistence.*;
+import javax.validation.Valid;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -11,13 +11,13 @@ import lombok.RequiredArgsConstructor;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_seq")
-    @SequenceGenerator(name = "address_seq")
+    @SequenceGenerator(name = "address_seq",allocationSize = 1,initialValue = 1)
     @Column(nullable = false)
     private Long id;
     private String locality;
 
 
-    @ManyToOne @Valid
+    @ManyToOne
     private City city;
 
 }

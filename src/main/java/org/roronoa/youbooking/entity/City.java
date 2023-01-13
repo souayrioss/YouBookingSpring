@@ -1,10 +1,10 @@
 package org.roronoa.youbooking.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_seq")
-    @SequenceGenerator(name = "city_seq")
+    @SequenceGenerator(name = "city_seq",allocationSize = 1,initialValue = 1)
     @Column(nullable = false)
     private Long id;
 
