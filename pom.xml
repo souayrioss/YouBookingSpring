@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.1</version>
+		<version>2.7.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.roronoa</groupId>
@@ -59,6 +59,21 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sonarsource.java</groupId>
+			<artifactId>sonar-compat</artifactId>
+			<version>3.14</version>
 		</dependency>
 	</dependencies>
 
