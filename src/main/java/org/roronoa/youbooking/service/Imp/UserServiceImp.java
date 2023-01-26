@@ -27,6 +27,7 @@ public class UserServiceImp implements IUserService {
         user.setUuid(UUID.randomUUID().toString());
         Role role = roleService.getRole(3L);
         user.setRole(role);
+        user.setActive(true);
         return userRepository.save(user);
     }
 
@@ -38,7 +39,7 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public List<UserApp> getListUsers() {
-        return userRepository.findAll();
+        return userRepository.findAllByActive(true);
     }
 
     @Override
@@ -48,5 +49,14 @@ public class UserServiceImp implements IUserService {
             return null;
         }
         return new User(userApp.getUuid() ,userApp.getPassword(), Collections.singleton(new SimpleGrantedAuthority(userApp.getRole().getAuthorities().toString())));
+    }
+
+    @Override
+    public UserApp bannerUser(String uuid) {
+        Optional<UserApp> userApp = userRepository.findByUuid(uuid);
+        if(!userApp.isPresent())return null;
+        UserApp user = userApp.get();
+        user.setActive(false);
+        return userRepository.save(user);
     }
 }
