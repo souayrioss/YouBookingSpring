@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 public class ReservationDto implements Serializable {
-
+    private Long id;
     private String uuid;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateReservation;
@@ -19,8 +19,8 @@ public class ReservationDto implements Serializable {
     private LocalDate dateDebut;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateFin;
-    @NotEmpty
-    private float totalPrice;
+    private Double totalPrice;
+    private int range;
     private List<RoomDto> rooms;
     private UserAppDto userApp;
 

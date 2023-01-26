@@ -1,21 +1,24 @@
 package org.roronoa.youbooking.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Data
 @RequiredArgsConstructor
-public class Reservation {
+public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservation_seq")
-    @SequenceGenerator(name = "reservation_seq")
+    @SequenceGenerator(name = "reservation_seq",allocationSize = 1,initialValue = 1)
     @Column(nullable = false)
     private Long idReservation;
 
@@ -23,15 +26,16 @@ public class Reservation {
     @NotEmpty
     @Column(unique = true, nullable = false,length = 60)
     private String uuid;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateReservation;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateDebut;
-    @NotEmpty
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dateFin;
-    @NotEmpty
     private int range;
-    @NotEmpty
-    private float totalPrice;
+
+    private Double totalPrice;
 
 
     @ManyToMany
@@ -43,7 +47,16 @@ public class Reservation {
     @ManyToOne
     private UserApp userApp;
 
-
-
-
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "idReservation=" + idReservation +
+                ", uuid='" + uuid + '\'' +
+                ", dateReservation=" + dateReservation +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                ", range=" + range +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }
