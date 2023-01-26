@@ -34,7 +34,18 @@ public class UserAppDto implements Serializable {
     @NotEmpty
     private String phone;
     private RoleDto role;
+    private boolean active;
 
-    private List<ReservationDto> reservations;
-
+    @Override
+    public String toString() {
+        return "UserAppDto{" +
+                "uuid='" + uuid + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", role=" + role +
+                ", active=" + active +
+                '}';
+    }
 }

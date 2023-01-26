@@ -19,4 +19,12 @@ public class CityDto implements Serializable {
     @NotBlank
     private String name;
     private List<AddressDto> addresses;
+
+    @Override
+    public String toString() {
+        return "CityDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

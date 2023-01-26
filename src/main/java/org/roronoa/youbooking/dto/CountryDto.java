@@ -18,4 +18,12 @@ public class CountryDto implements Serializable {
     @NotBlank
     private String name;
     private List<CityDto> cities;
+
+    @Override
+    public String toString() {
+        return "CountryDto{" +
+                "name='" + name + '\'' +
+                ", cities=" + cities +
+                '}';
+    }
 }

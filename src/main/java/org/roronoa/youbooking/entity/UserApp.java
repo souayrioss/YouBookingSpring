@@ -8,13 +8,14 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
 @RequiredArgsConstructor
-public class UserApp {
+public class UserApp implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     @SequenceGenerator(name = "user_seq",allocationSize = 1,initialValue = 1)
@@ -39,6 +40,8 @@ public class UserApp {
     private String phone;
     @ManyToOne @Valid
     private Role role;
+
+    private boolean active;
 
     @OneToMany(mappedBy = "userApp",fetch = FetchType.LAZY)
     private List<Hotel> hotels = new ArrayList<>();

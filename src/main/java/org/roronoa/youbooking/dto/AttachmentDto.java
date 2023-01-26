@@ -19,5 +19,15 @@ public class AttachmentDto implements Serializable {
     @NotNull
     private String fileName;
     private String attachmentType;
-    private HotelDto hotel;
+
+
+    @Override
+    public String toString() {
+        return "AttachmentDto{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", fileName='" + fileName + '\'' +
+                ", attachmentType='" + attachmentType + '\'' +
+                '}';
+    }
 }

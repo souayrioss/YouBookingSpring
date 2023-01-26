@@ -21,4 +21,13 @@ public class RoomDto implements Serializable {
     private String roomType;
     private ReservationDto reservation;
 
+    @Override
+    public String toString() {
+        return "RoomDto{" +
+                "reference='" + reference + '\'' +
+                ", price=" + price +
+                ", reserved=" + reserved +
+                ", roomType='" + roomType + '\'' +
+                '}';
+    }
 }
