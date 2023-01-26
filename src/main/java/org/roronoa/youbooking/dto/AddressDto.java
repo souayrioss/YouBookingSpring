@@ -12,4 +12,14 @@ import java.io.Serializable;
 public class AddressDto implements Serializable {
     private Long id;
     private String locality;
+    private CityDto city;
+
+    @Override
+    public String toString() {
+        return "AddressDto{" +
+                "id=" + id +
+                ", locality='" + locality + '\'' +
+                ", city=" + city +
+                '}';
+    }
 }

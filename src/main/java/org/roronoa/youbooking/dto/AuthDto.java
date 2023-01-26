@@ -16,4 +16,13 @@ public class AuthDto {
     @NotNull
     @NotEmpty
     private String password;
+
+    @Override
+    public String toString() {
+        return "AuthDto{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

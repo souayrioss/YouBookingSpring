@@ -18,4 +18,11 @@ public class AuthorityDto implements Serializable {
     @NotEmpty
     private String reference;
     private List<RoleDto> roles;
+
+    @Override
+    public String toString() {
+        return "AuthorityDto{" +
+                "reference='" + reference + '\'' +
+                '}';
+    }
 }

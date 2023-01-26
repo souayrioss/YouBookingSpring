@@ -99,12 +99,30 @@ public class UserResource {
         try {
            List<UserApp> users = userService.getListUsers();
             ResponseDTO<List<UserAppDto>> response = new ResponseDTO<>() ;
-            List<UserAppDto> usersDTO = users.stream().map(userApp -> EntityUtils.userToUserDTO(userApp)).collect(Collectors.toList());
+            List<UserAppDto> usersDTO = users.stream().map(EntityUtils::userToUserDTO).collect(Collectors.toList());
             response.setStatus(CODE_001);
             response.setData(usersDTO);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (Exception e){
             ResponseDTO<List<UserAppDto >> response = new ResponseDTO<>() ;
+            response.setStatus(CODE_000);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+    }
+    @GetMapping(path = "/userBanner/{uuid}")
+    public ResponseEntity<ResponseDTO<UserAppDto>> bannerUser(@PathVariable @NotEmpty @NotBlank String uuid){
+        try {
+            ResponseDTO<UserAppDto> response = new ResponseDTO<>() ;
+            UserApp user = userService.bannerUser(uuid);
+            if (!Objects.isNull(user)){
+                response.setData(EntityUtils.userToUserDTO(user));
+                response.setStatus(CODE_001);
+            }else {
+                response.setStatus("user not exist");
+            }
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (Exception e){
+            ResponseDTO<UserAppDto> response = new ResponseDTO<>() ;
             response.setStatus(CODE_000);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }

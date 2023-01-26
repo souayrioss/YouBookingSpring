@@ -1,18 +1,20 @@
 package org.roronoa.youbooking.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
+import java.io.Serializable;
 
 @Entity
 @Data
 @RequiredArgsConstructor
-public class Attachment {
+public class Attachment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attachment_seq")
-    @SequenceGenerator(name = "attachment_seq")
+    @SequenceGenerator(name = "attachment_seq",allocationSize = 1,initialValue = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -27,9 +29,12 @@ public class Attachment {
     private byte[] file;*/
 
     @NotEmpty @NotNull
-    private String fileUrl;
+    private String fileName;
     @ManyToOne
     private Hotel hotel;
+
+    @Enumerated(EnumType.STRING)
+    private RoomType attachmentType;
 
 
 }

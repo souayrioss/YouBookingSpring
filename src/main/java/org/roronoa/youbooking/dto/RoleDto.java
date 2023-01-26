@@ -14,4 +14,13 @@ public class RoleDto implements Serializable {
     @NotEmpty
     private  String name;
     private List<AuthorityDto> authorities;
+
+    @Override
+    public String toString() {
+        return "RoleDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", authorities=" + authorities +
+                '}';
+    }
 }

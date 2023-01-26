@@ -1,21 +1,22 @@
 package org.roronoa.youbooking.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
 @RequiredArgsConstructor
-public class Room {
+public class Room implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_seq")
-    @SequenceGenerator(name = "room_seq")
+    @SequenceGenerator(name = "room_seq",allocationSize = 1,initialValue = 1)
     @Column(nullable = false)
     private Long idRoom;
 
@@ -24,7 +25,8 @@ public class Room {
     @NotNull
     @Column(nullable = false,length = 20)
     private String reference;
-    @NotEmpty
+
+
     @Column(nullable = false)
     private float price;
 
@@ -34,7 +36,7 @@ public class Room {
     @NotNull
     private RoomType roomType;
 
-    @ManyToMany @Valid
+    @ManyToMany
     @JoinTable(name = "T_reservations_rooms__Associations",
             joinColumns = @JoinColumn( name = "idRoom" ),
             inverseJoinColumns = @JoinColumn( name = "idReservation" ) )
@@ -43,7 +45,14 @@ public class Room {
     @ManyToOne
     private Hotel hotel;
 
-
-
-
+    @Override
+    public String toString() {
+        return "Room{" +
+                "idRoom=" + idRoom +
+                ", reference='" + reference + '\'' +
+                ", price=" + price +
+                ", reserved=" + reserved +
+                ", roomType=" + roomType +
+                '}';
+    }
 }

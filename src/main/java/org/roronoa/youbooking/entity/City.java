@@ -8,12 +8,13 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
 @RequiredArgsConstructor
-public class City {
+public class City implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_seq")
     @SequenceGenerator(name = "city_seq",allocationSize = 1,initialValue = 1)

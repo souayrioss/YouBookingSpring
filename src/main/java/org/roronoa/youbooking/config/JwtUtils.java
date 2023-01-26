@@ -3,6 +3,9 @@ package org.roronoa.youbooking.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.roronoa.youbooking.entity.UserApp;
+import org.roronoa.youbooking.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.internal.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -14,7 +17,9 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class JwtUtils {
-    private String jwtSingningKey = "secret";
+    @Autowired
+    private IUserService userService;
+    private String jwtSingningKey = "d6981c7290ebed5a1fb91cec0b18c2f0";
 
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
@@ -45,18 +50,17 @@ public class JwtUtils {
 
     public String generateToken(UserDetails userDetails){
         Map<String,Object> claims = new HashMap<>();
-        return createToken(claims,userDetails);
-    }
-
-    public String generateToken(UserDetails userDetails,Map<String,Object> claims){
-        Map<String,Object> claimss = new HashMap<>();
+        UserApp userApp = userService.getUser(userDetails.getUsername());
+        claims.put("userId",userDetails.getUsername());
+        claims.put("name",userApp.getFullName());
+        claims.put("role",userApp.getRole().getName());
         return createToken(claims,userDetails);
     }
 
     private String createToken(Map<String,Object> claims, UserDetails userDetails){
 
         return Jwts.builder().setClaims(claims)
-                .setSubject(userDetails.getUsername())
+                .setSubject("YouBooking")
                 .claim("authorities",userDetails.getAuthorities())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+ TimeUnit.MINUTES.toMillis(5)))
