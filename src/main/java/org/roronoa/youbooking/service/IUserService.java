@@ -11,5 +11,6 @@ public interface IUserService {
     List<UserApp> getListUsers();
 
     UserDetails findByEmail(String email);
+    UserApp bannerUser(String uuid);
 
 }
