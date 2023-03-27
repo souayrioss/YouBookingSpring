@@ -1,0 +1,55 @@
+version: '3'
+services:
+  youBooking:
+    image: youbooking
+    ports:
+      - "9999:9999"
+    depends_on:
+      - postgres_db
+  postgres_db:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_DB=YouBooking
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=brook
+    ports:
+      - "5432:5432"
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"] # Command to check health.
+        interval: 5s # Interval between health checks.
+        timeout: 5s # Timeout for each health checking.
+        retries: 20 # Hou many times retries.
+  front-end:
+    image: front-end
+    build: C:/Users/Youcode/IdeaProjects/Angular/YouBooking/
+    ports:
+      - "62250:80"
+    depends_on:
+      - youBooking
+
+
+#services:
+#  youBooking:
+#    image: youbooking
+#    ports:
+#      - "9999:9999"
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#
+#  postgres:
+#    image: postgres
+#    volumes:
+#      - ./config/mysql:/etc/mysql/conf.d
+#    environment:
+#      - POSTGRES_DB=youBooking
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=brook
+#    healthcheck:
+#      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-ppass"] # Command to check health.
+#      interval: 5s # Interval between health checks.
+#      timeout: 5s # Timeout for each health checking.
+#      retries: 20 # Hou many times retries.
+#
+#networks:
+#  employee-mysql:
